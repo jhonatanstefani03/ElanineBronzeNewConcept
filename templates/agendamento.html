@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaine Bronze</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+ <h1>Pagina de Estoque</h1>
+  <form id="estoque-form">
+    <label for="fitas">Quantidade de fitas:</label>
+    <input type="number" id="fitas" name="fitas" min="0" required><br><br>
+
+    <label for="produtos">Quantidade de produtos:</label>
+    <input type="number" id="produtos" name="produtos" min="0" required><br><br>
+    <button type="submit">Salvar</button>
+  </form>
+
+  <h3>Estoque atual:</h3>
+  <div id="estoque-atual">
+    <p>Fitas: <span id="qtd-fitas">{{ estoque['fitas'] }}</span></p>
+    <p>Produtos: <span id="qtd-produtos">{{ estoque['produtos'] }}</span></p>
+  </div>
+
+  <script>
+    document.getElementById('estoque-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const fitas = document.getElementById('fitas').value;
+      const produtos = document.getElementById('produtos').value;
+
+      try {
+        const response = await fetch('/atualizar_estoque', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ fitas, produtos })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          document.getElementById('qtd-fitas').textContent = data.fitas;
+          document.getElementById('qtd-produtos').textContent = data.produtos;
+        } else {
+          alert('Erro ao salvar');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao salvar');
+      }
+    });
+  </script>
+</body>
+</html>

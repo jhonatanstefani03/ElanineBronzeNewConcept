@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaine Bronze</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    {% set menssagem = get_flashed_messages() %}
+    {% if menssagem %}
+    <div class="flash_alerta">{{menssagem[0]}}</div>
+    {% endif %}
+
+    <!-- <img src="/static/logo.png" alt="logo"> -->
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Elaine Bronze" />
+    <h1>Elaine Bronze New Concept</h1>
+    <div class="form">
+    <form action="/login" id="/login" method="post">
+    <div class="nome">
+        <label  for="nome">Usuário</label>
+        <input type="text" name="nome" id="nome" required placeholder="digite o usuario"><br>
+        </div>
+        <label for="senha">Senha</label>
+         <input type="password" name="senha" id="senha" required placeholder="digite sua senha"><br><br>
+    <div class="botao">
+            <button  type="submit" id="btn_login"><br>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>ENTRAR
+         </button>
+    </div>
+    </form>
+    </div>
+    
+</body>
+</html>

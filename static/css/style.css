@@ -1,0 +1,71 @@
+:root{
+    --cor_primaria:#f7d9b8;
+    --cor_secundaria:#5a3e1b;
+}
+
+body {
+    background-color: #f7d9b8; /* cor de fundo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #5a3e1b; /* cor do texto */
+    text-align: center;
+    padding: 10px;
+}
+
+img {
+    width: 200px; /* tamanho do logo */
+    margin-bottom: 2px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+div.form{
+    color: white;
+    background-color: #5a3e1b;
+    text-align: center;
+    padding: 10px;
+    border-radius:  50px;
+    margin: 0;
+}
+div.botao{
+border-radius: 20px;
+text-align:  center;
+font-weight: bold;
+}
+
+.nome{
+    padding: 10px;
+}
+
+label{
+    font-weight: bold;
+}
+
+input:hover{
+    background-color:var(--cor_primaria) ;
+}
+
+button{
+    text-align: center;
+    border-radius: 20px;
+    justify-content: center;
+}
+button:hover{
+    background-color: var(--cor_secundaria);
+    color: var(--cor_primaria);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input{
+    font-weight: 100px;
+}
