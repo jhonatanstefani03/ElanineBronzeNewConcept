@@ -19,7 +19,7 @@
     <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Elaine Bronze" />
     <h1>Elaine Bronze New Concept</h1>
     <div class="form">
-    <form action="/login" id="/login" method="post">
+    <form action="{{ url_for('login') }}" method="post">
     <div class="nome">
         <label  for="nome">Usuário</label>
         <input type="text" name="nome" id="nome" required placeholder="digite o usuario"><br>

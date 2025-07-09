@@ -20,24 +20,38 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 db.init_app(app)
 
 
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('logged_in'):
+            flash('Você precisa fazer login primeiro!')
+            return redirect(url_for('home'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/')
 def home():
     return render_template('/index.html')
 
 @app.route("/login", methods=['POST'])
-def index():
+def login():
     nome = request.form.get('nome')
     senha = request.form.get('senha')
     cliente = Cliente.query.filter_by(nome=nome, senha=senha).first()
 
+    
     if cliente:
-        return render_template('agendamento.html',estoque=estoque)  # ou redireciona para página principal
+        session['logged_in'] = True
+        return redirect(url_for('bronze'))  # redireciona para página protegida
     else:
         flash('Usuário ou senha inválidos!')
         return redirect('/')
 
 
 @app.route('/agendamento')
+@login_required
 def bronze():
     return render_template('agendamento.html', estoque=estoque)
 
@@ -54,6 +68,12 @@ def atualizar_estoque():
     estoque['produtos'] = int(data['produtos'])
     # Retorna o estoque atualizado como JSON
     return jsonify (estoque)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Você saiu com sucesso!')
+    return redirect('/')
 
 
 if __name__ == "__main__":
