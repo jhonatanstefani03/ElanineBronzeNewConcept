@@ -1,9 +1,7 @@
 from flask import Flask, render_template,request,redirect, flash,url_for, session,jsonify
 from models import db,Cliente
-from google_auth_oauthlib.flow import Flow
-from googleapiclient.discovery import build
-from google.oauth2.credentials import Credentials
-import os
+
+
 
 
 
@@ -13,9 +11,6 @@ app.secret_key = 'um_valor_bem_secreto_e_dificil_de_adivinhar_123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-CLIENT_SECRETS_FILE = "client_secret.json"
-SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 db.init_app(app)
 
